@@ -5,44 +5,72 @@
 <title>CSC 302 Assignment 2</title>
 </head>
 <body>
-	<fieldset>
-	<legend>Input</legend>
-	<br />
-	<div>
-		<label>User Name: </label>
-		<input id="Username" type="text"></input>
-	</div>
-	<br />
-	<div>
-		<label>Number of Apples: </label>
-		<input id="apples" type="text"></input>
-	</div>
-	<br />
-	<div>
-		<label>Number of Oranges: </label>
-		<input id="oranges" type="text"></input>
-	</div>
-	<br />
-	<div>
-		<label>Number of Bananas: </label>
-		<input id="bananas" type="text"></input>
-	</div>
-	<br />
-	</fieldset>
-	<br />
-	<div>
-		<label>Total Cost: $</label>
-		<input id="totalCost" onfocus="blurTotalCost()" type="text"></input>
-	</div>
+	<h1>CSC 302 Assignment 2</h1>
+	<form action="" method="post">
+		<div>
+			<fieldset>
+				<legend>Input</legend>
+				<div>
+					<label>User Name: </label> <input id="Username" type="text" />
+				</div>
+				<br />
+				<div>
+					<label>Number of Apples: </label> <input id="apples"
+						onchange="validate()" type="text" />
+				</div>
+				<br />
+				<div>
+					<label>Number of Oranges: </label> <input id="oranges"
+						onchange="validate()" type="text" />
+				</div>
+				<br />
+				<div>
+					<label>Number of Bananas: </label> <input id="bananas"
+						onchange="validate()" type="text" />
+				</div>
+			</fieldset>
+		</div>
+		<div>
+			<fieldset>
+				<legend>Payment Method</legend>
+				<div>
+					<input type="radio" name="Visa" value="visa">Visa
+					<input type="radio" name="MasterCard" value="mastercard">MasterCard
+					<input type="radio" name="Discover" value="discover">Discover
+				</div>
+			</fieldset>
+		</div>
+		<br />
+		<div>
+			<label>Total Cost: $</label> <input id="totalCost" onfocus="blur()"
+				type="text" />
+		</div>
+		<br />
+		<div>
+			<input type="submit" value="Submit" />
+		</div>
+	</form>
 </body>
 <script type="text/javascript">
-	function blurTotalCost() {
+	function blur()
+	{
 		document.getElementById("totalCost").blur();
 	}
 	
-	var appleCost = 0.69;
-	var orangeCost = 0.59;
-	var bananaCost = 0.39;
-	var grossTotal = 0.0;
+	function validate() {
+		var appleQty = parseInt(document.getElementById("apples").value);
+		var orangeQty = parseInt(document.getElementById("oranges").value);
+		var bananaQty = parseInt(document.getElementById("bananas").value);
+		if (isNaN(appleQty) || isNaN(orangeQty) || isNaN(bananaQty))
+		{
+			document.getElementById("totalCost").value = NaN;
+			return;
+		}
+		
+		var appleCost = 0.69;
+		var orangeCost = 0.59;
+		var bananaCost = 0.39;
+		document.getElementById("totalCost").value = ((appleCost * appleQty) + (orangeCost * orangeQty) + (bananaCost * bananaQty)).toFixed(2);
+	}
 </script>
 </html>
