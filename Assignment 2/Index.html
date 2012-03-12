@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>CSC 302 Assignment 2</title>
+</head>
+<body>
+	<fieldset>
+	<legend>Input</legend>
+	<br />
+	<div>
+		<label>User Name: </label>
+		<input id="Username" type="text"></input>
+	</div>
+	<br />
+	<div>
+		<label>Number of Apples: </label>
+		<input id="apples" type="text"></input>
+	</div>
+	<br />
+	<div>
+		<label>Number of Oranges: </label>
+		<input id="oranges" type="text"></input>
+	</div>
+	<br />
+	<div>
+		<label>Number of Bananas: </label>
+		<input id="bananas" type="text"></input>
+	</div>
+	<br />
+	</fieldset>
+	<br />
+	<div>
+		<label>Total Cost: $</label>
+		<input id="totalCost" onfocus="blurTotalCost()" type="text"></input>
+	</div>
+</body>
+<script type="text/javascript">
+	function blurTotalCost() {
+		document.getElementById("totalCost").blur();
+	}
+	
+	var appleCost = 0.69;
+	var orangeCost = 0.59;
+	var bananaCost = 0.39;
+	var grossTotal = 0.0;
+</script>
+</html>
