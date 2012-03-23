@@ -6,12 +6,13 @@
 </head>
 <body>
 	<h1>CSC 302 Assignment 2</h1>
-	<form action="ProcessOrder.php" method="post">
+	<form action="ProcessOrder.php" method="post" name="order"
+		onsubmit="return validateForm()">
 		<div>
 			<fieldset>
 				<legend>Input</legend>
 				<div>
-					<label>User Name: </label> <input id="Username" type="text" />
+					<label>User Name: </label> <input id="username" type="text" />
 				</div>
 				<br />
 				<div>
@@ -34,9 +35,9 @@
 			<fieldset>
 				<legend>Payment Method</legend>
 				<div>
-					<input type="radio" name="Visa" value="visa">Visa <input
-						type="radio" name="MasterCard" value="mastercard">MasterCard
-					<input type="radio" name="Discover" value="discover">Discover
+					<input type="radio" name="card" value="visa">Visa <input
+						type="radio" name="card" value="mastercard">MasterCard <input
+						type="radio" name="card" value="discover">Discover
 				</div>
 			</fieldset>
 		</div>
@@ -56,12 +57,18 @@
 		document.getElementById("totalCost").blur();
 	}
 
-	// JavaScript method for explicitly checking the validity of all form inputs
+	// Method for explicitly checking the validity of all form inputs
 	function validateForm() {
-		return (validateFruits() && validatePayment());
+		var errorMsg = new Array();
+		var result = (validateUsername(errorMsg) && validateFruits(errorMsg) && validatePayment(errorMsg));
+		if (!result) {
+			alert("Error!");
+		}
+		return result;
 	}
 
-	// JavaScript method for explicitly checking the input of the quantity of desired fruits
+	// Method for explicitly checking the input of the quantity of desired fruits
+	// TODO: Append error messages as required
 	function validateFruits() {
 		var appleQty = parseInt(document.getElementById("apples").value);
 		var orangeQty = parseInt(document.getElementById("oranges").value);
@@ -80,9 +87,31 @@
 		return true;
 	}
 
-	// JavaScript method for explicitly checking the payment method
+	// Method for explicitly checking the payment method
+	// TODO: Append error messages as required
 	function validatePayment() {
-		return false;
+		var paymentModes = document.order.card;
+		var card = null;
+		for (i = 0; i < paymentModes.length; i++) {
+			if (paymentModes[i].checked) {
+				card = paymentModes[i].value;
+				break;
+			}
+		}
+
+		if (!card) {
+			return false;
+		}
+		return true;
+	}
+
+	// Method for explicitly checking the payment method
+	// TODO: Append error messages as required
+	function validateUsername() {
+		var username = document.getElementById("username").value;
+		if (!username || username === "") {
+			return false;
+		}
 		return true;
 	}
 </script>
