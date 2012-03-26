@@ -60,16 +60,18 @@
 	// Method for explicitly checking the validity of all form inputs
 	function validateForm() {
 		var errorMsg = new Array();
+		errorMsg.add("Error!");
+		errorMsg.add("Line 2.");
 		var result = (validateUsername(errorMsg) && validateFruits(errorMsg) && validatePayment(errorMsg));
 		if (!result) {
-			alert("Error!");
+			alert("Error");
 		}
 		return result;
 	}
 
 	// Method for explicitly checking the input of the quantity of desired fruits
 	// TODO: Append error messages as required
-	function validateFruits() {
+	function validateFruits(msg) {
 		var appleQty = parseInt(document.getElementById("apples").value);
 		var orangeQty = parseInt(document.getElementById("oranges").value);
 		var bananaQty = parseInt(document.getElementById("bananas").value);
@@ -89,7 +91,7 @@
 
 	// Method for explicitly checking the payment method
 	// TODO: Append error messages as required
-	function validatePayment() {
+	function validatePayment(msg) {
 		var paymentModes = document.order.card;
 		var card = null;
 		for (i = 0; i < paymentModes.length; i++) {
@@ -100,6 +102,7 @@
 		}
 
 		if (!card) {
+			//msg.add("Please select a card. <br />");
 			return false;
 		}
 		return true;
@@ -107,9 +110,10 @@
 
 	// Method for explicitly checking the payment method
 	// TODO: Append error messages as required
-	function validateUsername() {
+	function validateUsername(msg) {
 		var username = document.getElementById("username").value;
 		if (!username || username === "") {
+			//temp.add("Invalid username. <br />");
 			return false;
 		}
 		return true;
