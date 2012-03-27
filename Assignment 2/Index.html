@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="styles.css" />
 <title>CSC 302 Assignment 2</title>
 </head>
 <body>
@@ -11,44 +12,50 @@
 		<div>
 			<fieldset>
 				<legend>Input</legend>
-				<div>
-					<label>User Name: </label> <input id="username" type="text" />
+				<div class="padding">
+					<label>User Name: </label> <input id="username" type="text" /> <label
+						class="validator" id="usernameValidator">* Enter a
+						username</label>
 				</div>
-				<br />
-				<div>
+				<div class="padding">
 					<label>Number of Apples: </label> <input id="apples"
-						onchange="validateFruits()" type="text" />
+						onchange="validateFruits()" type="text" /> <label
+						class="validator" id="appleValidator"></label>
 				</div>
-				<br />
-				<div>
+				<div class="padding">
 					<label>Number of Oranges: </label> <input id="oranges"
-						onchange="validateFruits()" type="text" />
+						onchange="validateFruits()" type="text" /> <label
+						class="validator" id="orangeValidator">* Invalid number of
+						oranges</label>
 				</div>
-				<br />
-				<div>
+				<div class="padding">
 					<label>Number of Bananas: </label> <input id="bananas"
-						onchange="validateFruits()" type="text" />
+						onchange="validateFruits()" type="text" /> <label
+						class="validator" id="bananaValidator">* Invalid number of
+						bananas</label>
 				</div>
 			</fieldset>
 		</div>
-		<div>
+		<div class="padding">
 			<fieldset>
 				<legend>Payment Method</legend>
-				<div>
-					<input type="radio" name="card" value="visa">Visa <input
-						type="radio" name="card" value="mastercard">MasterCard <input
-						type="radio" name="card" value="discover">Discover
+				<div class="float">
+					<input type="radio" name="payment" value="visa">Visa <input
+						type="radio" name="payment" value="mastercard">MasterCard
+					<input type="radio" name="payment" value="discover">Discover
 				</div>
+				&nbsp;<label class="validator" id="paymentValidator">*
+					Select a payment method</label>
+				<div class="clear"></div>
 			</fieldset>
 		</div>
-		<br />
-		<div>
+		<div class="padding">
 			<label>Total Cost: $</label> <input id="totalCost" onfocus="blur()"
 				type="text" />
 		</div>
-		<br />
-		<div>
-			<input name="submit" type="submit" value="Submit" />
+		<div class="padding">
+			<input name="submit" type="submit" value="Submit" /> <input
+				type="reset" value="Reset" />
 		</div>
 	</form>
 </body>
@@ -57,42 +64,87 @@
 		document.getElementById("totalCost").blur();
 	}
 
+	// Method that calculates the total cost of the order
+	function calculateTotal() {
+		var appleCost = 0.69;
+		var orangeCost = 0.59;
+		var bananaCost = 0.39;
+		document.getElementById("totalCost").value = ((appleCost * parseInt(getFieldValue("apples")))
+				+ (orangeCost * parseInt(getFieldValue("oranges"))) + (bananaCost * parseInt(getFieldValue("bananas"))))
+				.toFixed(2);
+	}
+
+	// Method for getting the integer value of a field
+	function getFieldValue(fieldName) {
+		return (document.getElementById(fieldName).value);
+	}
+
+	function toggleFieldDisplay(fieldName) {
+		var field = document.getElementById(fieldName);
+	}
+
 	// Method for explicitly checking the validity of all form inputs
 	function validateForm() {
 		var errorMsg = new Array();
-		errorMsg.add("Error!");
-		errorMsg.add("Line 2.");
-		var result = (validateUsername(errorMsg) && validateFruits(errorMsg) && validatePayment(errorMsg));
+		var result = (validateUsername(errorMsg) && validateFruits() && validatePayment(errorMsg));
 		if (!result) {
 			alert("Error");
 		}
 		return result;
 	}
 
-	// Method for explicitly checking the input of the quantity of desired fruits
-	// TODO: Append error messages as required
-	function validateFruits(msg) {
-		var appleQty = parseInt(document.getElementById("apples").value);
-		var orangeQty = parseInt(document.getElementById("oranges").value);
-		var bananaQty = parseInt(document.getElementById("bananas").value);
-		if (isNaN(appleQty) || isNaN(orangeQty) || isNaN(bananaQty)) {
+	// Method for validating apple input
+	function validateApple() {
+		var appleQty = parseInt(getFieldValue("apples"));
+		var validator = document.getElementById("appleValidator");
+		if (isNaN(appleQty) || appleQty < 0) {
+			validator.textContent = "* Invalid number of apples";
+			validator.style.display = "inline";
+			return false;
+		} else {
+			document.getElementById("appleValidator").style.display = "none";
+			validator.textContent = "";
+			validator.style.display = "none";
+			return true;
+		}
+	}
+
+	// Method for validating banana input
+	function validateBanana() {
+		var bananaQty = parseInt(getFieldValue("bananas"));
+		if (isNaN(bananaQty) || bananaQty < 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	// Method for validating all fruit input fields
+	function validateFruits() {
+		var apple = validateApple();
+		var banana = validateBanana();
+		var orange = validateOrange();
+		if (!(apple || banana || orange)) {
 			document.getElementById("totalCost").value = NaN;
 			return false;
 		}
-
-		var appleCost = 0.69;
-		var orangeCost = 0.59;
-		var bananaCost = 0.39;
-		document.getElementById("totalCost").value = ((appleCost * appleQty)
-				+ (orangeCost * orangeQty) + (bananaCost * bananaQty))
-				.toFixed(2);
+		calculateTotal();
 		return true;
 	}
 
+	// Method for validating orange input
+	function validateOrange() {
+		var orangeQty = parseInt(getFieldValue("oranges"));
+		if (isNaN(orangeQty) || orangeQty < 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 	// Method for explicitly checking the payment method
-	// TODO: Append error messages as required
 	function validatePayment(msg) {
-		var paymentModes = document.order.card;
+		var paymentModes = document.order.payment;
 		var card = null;
 		for (i = 0; i < paymentModes.length; i++) {
 			if (paymentModes[i].checked) {
@@ -100,20 +152,19 @@
 				break;
 			}
 		}
-
 		if (!card) {
-			//msg.add("Please select a card. <br />");
 			return false;
 		}
 		return true;
 	}
 
 	// Method for explicitly checking the payment method
-	// TODO: Append error messages as required
 	function validateUsername(msg) {
+		var usernameInput = document.getElementById("username");
 		var username = document.getElementById("username").value;
-		if (!username || username === "") {
-			//temp.add("Invalid username. <br />");
+		if (!username) {
+			usernameInput.focus();
+			usernameInput.select();
 			return false;
 		}
 		return true;

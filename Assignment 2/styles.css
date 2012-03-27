@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+body {
+	font: 1em arial, sans-serif;
+}
+
+.clear {
+	clear: both;
+}
+
+.float {
+	float: left;
+}
+
+#errorSummary {
+	color: red;
+	display: none;
+}
+
+.padding {
+	margin: 10px 0px 10px 0px;
+}
+
+.validator {
+	color: red;
+	display: none;
+}
