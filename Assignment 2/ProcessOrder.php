@@ -1,12 +1,12 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
+<meta charset="UTF-8">
 <title>Order Processed</title>
 </head>
 <body>
 	<?php
-	echo "Hello World!";
+		echo "Hello World!";
 	?>
 </body>
 </html>

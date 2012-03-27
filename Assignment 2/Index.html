@@ -91,7 +91,10 @@
 
 	// Function that validates all fruit intput fields
 	function validateFruits() {
-		return (validateApple() && validateBanana() && validateOrange());
+		var apple = validateApple();
+		var banana = validateBanana();
+		var orange = validateOrange();
+		return (apple && banana && orange);
 	}
 
 	// Function for validating apple input
