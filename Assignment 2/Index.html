@@ -7,25 +7,26 @@
 </head>
 <body>
 	<h1>CSC 302 Assignment 2</h1>
-	<form action="ProcessOrder.php" method="post" name="order">
+	<form action="ProcessOrder.php" method="post" name="form"
+		onsubmit="return validateForm()">
 		<div>
 			<fieldset>
-				<legend>Input</legend>
+				<legend>Order</legend>
 				<div class="padding">
 					<label>User Name: </label> <input id="username" type="text" /> <label
 						class="validator" id="usernameValidator"></label>
 				</div>
 				<div class="padding">
-					<label>Number of Apples: </label> <input id="apples" type="text" />
-					<label class="validator" id="appleValidator"></label>
+					<label>Number of Apples ($0.69 / ea): </label> <input id="apples"
+						type="text" /> <label class="validator" id="appleValidator"></label>
 				</div>
 				<div class="padding">
-					<label>Number of Oranges: </label> <input id="oranges" type="text" />
-					<label class="validator" id="orangeValidator"></label>
+					<label>Number of Oranges ($0.59 / ea): </label> <input id="oranges"
+						type="text" /> <label class="validator" id="orangeValidator"></label>
 				</div>
 				<div class="padding">
-					<label>Number of Bananas: </label> <input id="bananas" type="text" />
-					<label class="validator" id="bananaValidator"></label>
+					<label>Number of Bananas ($0.39 / ea): </label> <input id="bananas"
+						type="text" /> <label class="validator" id="bananaValidator"></label>
 				</div>
 			</fieldset>
 		</div>
@@ -33,9 +34,11 @@
 			<fieldset>
 				<legend>Payment Method</legend>
 				<div class="float">
-					<input type="radio" name="payment" value="visa">Visa <input
-						type="radio" name="payment" value="mastercard">MasterCard
-					<input type="radio" name="payment" value="discover">Discover
+					<input type="radio" name="payment" onchange="validatePayment()"
+						value="visa">Visa <input type="radio" name="payment"
+						onchange="validatePayment()" value="mastercard">MasterCard
+					<input type="radio" name="payment" onchange="validatePayment()"
+						value="discover">Discover
 				</div>
 				&nbsp;<label class="validator" id="paymentValidator"></label>
 				<div class="clear"></div>
@@ -46,8 +49,8 @@
 				type="text" />
 		</div>
 		<div class="padding">
-			<input id="submit" type="submit" value="Submit" /> <input
-				type="reset" value="Reset" />
+			<input type="submit" value="Submit" /> <input type="reset"
+				value="Reset" />
 		</div>
 	</form>
 </body>
@@ -72,7 +75,7 @@
 	// Function that register the various event handlers to the input fields
 	function registerHandlers() {
 		document.getElementById("username").addEventListener("change",
-				validatePayment);
+				validateUsername);
 		var apples = document.getElementById("apples");
 		apples.addEventListener("change", validateApple);
 		apples.addEventListener("change", calculateTotal);
@@ -84,25 +87,11 @@
 		document.getElementById("oranges").addEventListener("change",
 				validateOrange);
 		oranges.addEventListener("change", calculateTotal);
-		document.getElementById("payment").addEventListener("change",
-				validatePayment);
 	}
 
 	// Function that validates all fruit intput fields
 	function validateFruits() {
-		var apple = validateApple();
-		var banana = validateBanana();
-		var orange = validateOrange();
-	}
-
-	// Function for checking all form input
-	function validateForm() {
-		var username = validateUsername();
-		var fruits = validateFruits();
-		var payment = validatePayment();
-		if (!(username && fruits && payment)) {
-		}
-		return result;
+		return (validateApple() && validateBanana() && validateOrange());
 	}
 
 	// Function for validating apple input
@@ -136,6 +125,17 @@
 		return true;
 	}
 
+	// Function for checking all form input
+	function validateForm() {
+		var username = validateUsername();
+		var fruits = validateFruits();
+		var payment = validatePayment();
+		if (!(username && fruits && payment)) {
+			return false;
+		}
+		return true;
+	}
+
 	// Function for validating orange input
 	function validateOrange() {
 		var valid = false;
@@ -154,7 +154,7 @@
 
 	// Function for explicitly checking the payment method
 	function validatePayment() {
-		var paymentModes = document.order.payment;
+		var paymentModes = document.form.payment;
 		var card = null;
 		var validator = document.getElementById("paymentValidator");
 		for (i = 0; i < paymentModes.length; i++) {
