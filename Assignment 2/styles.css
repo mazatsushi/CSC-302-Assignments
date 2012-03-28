@@ -8,6 +8,10 @@ body {
 	font: 1em arial, sans-serif;
 }
 
+.clear {
+	clear: both;
+}
+
 div.header {
 	float: left;
 	font-weight: bold;
@@ -24,14 +28,10 @@ div.data {
 	width: 150px;
 }
 
-.summary {
-	background: #ADD8E6;
+.error {
+	background: #DC143C;
+	color: white;
 	text-align: center;
-	width: 400px;
-}
-
-.clear {
-	clear: both;
 }
 
 .float {
@@ -45,6 +45,12 @@ div.data {
 .receipt {
 	margin-left: auto;
 	margin-right: auto;
+	width: 400px;
+}
+
+.summary {
+	background: #ADD8E6;
+	text-align: center;
 	width: 400px;
 }
 

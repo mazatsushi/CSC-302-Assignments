@@ -12,31 +12,25 @@
 	$bananas = $_REQUEST["bananas"];
 	$oranges = $_REQUEST["oranges"];
 	$payment = $_REQUEST["payment"];
-	$errorMsg = array();
 	try {
 		// Code block for checking for invalid input values
-		if (is_null($username)) {
-			array_push($errorMsg, "Invalid user name.");
+		if (is_null($username) || strlen($username) < 1) {
+			throw new UnexpectedValueException("Invalid user name.");
 		}
-		if (is_null($apples) || is_nan($apples) || $apples < 0) {
-			array_push($errorMsg, "Invalid number of apples.");
+		if (is_null($apples) || is_numeric($apples) || $apples < 0) {
+			throw new UnexpectedValueException("Invalid number of apples.");
 		}
-		if (is_null($bananas) || is_nan($bananas) || $bananas < 0) {
-			array_push($errorMsg, "Invalid number of bananas.");
+		if (is_null($bananas) || is_numeric($bananas) || $bananas < 0) {
+			throw new UnexpectedValueException("Invalid number of bananas.");
 		}
-		if (is_null($oranges) || is_nan($oranges) || $oranges < 0) {
-			array_push($errorMsg, "Invalid number of oranges.");
+		if (is_null($oranges) || is_numeric($oranges) || $oranges < 0) {
+			throw new UnexpectedValueException("Invalid number of oranges.");
 		}
-		if (is_null($payment)) {
-			array_push($errorMsg, "Invalid payment mode.");
-		}
-		if (sizeOf($errorMsg) > 0) {
-			$errorMsg = array_reverse($errorMsg);
-			throw new UnexpectedValueException($errorMsg);
+		if (is_null($payment) || strlen($payment) < 1) {
+			throw new UnexpectedValueException("Invalid payment mode.");
 		}
 
 		$total = (0.69 * $apples) + (0.59 * $bananas) + (0.39 * $oranges);
-
 		echo '<div class="receipt">
 		<div class="summary">
 		<label>Your order has been received.</label>
@@ -91,7 +85,12 @@
 		</div>';
 	}
 	catch(UnexpectedValueException $e) {
-
+		echo '<div class="receipt">
+		<div class="error">
+		<label>';
+		echo $e->getMessage();
+		echo '</label>
+		</div>';
 	}
 	?>
 </body>
