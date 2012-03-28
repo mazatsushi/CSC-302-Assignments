@@ -4,6 +4,31 @@ body {
 	font: 1em arial, sans-serif;
 }
 
+div.header {
+	overflow: hidden;
+}
+
+div.header label.display {
+	display: block;
+	float: left;
+	text-align: right;
+	width: 220px;
+}
+
+div.header label.data {
+	display: block;
+	float: right;
+	text-align: left;
+	width: 150px;
+}
+
+div.header label.summary {
+	display: block;
+	float: left;
+	text-align: center;
+	width: 500px;
+}
+
 .clear {
 	clear: both;
 }
@@ -12,13 +37,14 @@ body {
 	float: left;
 }
 
-#errorSummary {
-	color: red;
-	display: none;
-}
-
 .padding {
 	margin: 10px 0px 10px 0px;
+}
+
+.receipt {
+	margin-left: auto;
+	margin-right: auto;
+	width: 600px;
 }
 
 .validator {

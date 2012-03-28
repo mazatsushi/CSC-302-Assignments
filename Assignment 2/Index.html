@@ -13,20 +13,23 @@
 			<fieldset>
 				<legend>Order</legend>
 				<div class="padding">
-					<label>User Name: </label> <input id="username" type="text" /> <label
-						class="validator" id="usernameValidator"></label>
+					<label>User Name: </label> <input id="username" name="username"
+						type="text" /> <label class="validator" id="usernameValidator"></label>
 				</div>
 				<div class="padding">
 					<label>Number of Apples ($0.69 / ea): </label> <input id="apples"
-						type="text" /> <label class="validator" id="appleValidator"></label>
+						name="apples" type="text" /> <label class="validator"
+						id="appleValidator"></label>
 				</div>
 				<div class="padding">
 					<label>Number of Oranges ($0.59 / ea): </label> <input id="oranges"
-						type="text" /> <label class="validator" id="orangeValidator"></label>
+						name="oranges" type="text" /> <label class="validator"
+						id="orangeValidator"></label>
 				</div>
 				<div class="padding">
 					<label>Number of Bananas ($0.39 / ea): </label> <input id="bananas"
-						type="text" /> <label class="validator" id="bananaValidator"></label>
+						name="bananas" type="text" /> <label class="validator"
+						id="bananaValidator"></label>
 				</div>
 			</fieldset>
 		</div>
@@ -45,8 +48,8 @@
 			</fieldset>
 		</div>
 		<div class="padding">
-			<label>Total Cost: $</label> <input id="totalCost" onfocus="blur()"
-				type="text" />
+			<label>Total Cost: $</label> <input id="totalCost" name="totalCost"
+				onfocus="blur()" type="text" />
 		</div>
 		<div class="padding">
 			<input type="submit" value="Submit" /> <input type="reset"
