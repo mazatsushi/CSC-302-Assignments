@@ -1,32 +1,33 @@
 @CHARSET "UTF-8";
 
+.alt {
+	background: #B0E0E6;
+}
+
 body {
 	font: 1em arial, sans-serif;
 }
 
 div.header {
+	float: left;
+	font-weight: bold;
+	overflow: hidden;
+	text-align: left;
+	width: 250px;
 	overflow: hidden;
 }
 
-div.header label.display {
+div.data {
 	display: block;
 	float: left;
 	text-align: right;
-	width: 220px;
-}
-
-div.header label.data {
-	display: block;
-	float: right;
-	text-align: left;
 	width: 150px;
 }
 
-div.header label.summary {
-	display: block;
-	float: left;
+.summary {
+	background: #ADD8E6;
 	text-align: center;
-	width: 500px;
+	width: 400px;
 }
 
 .clear {
@@ -44,7 +45,7 @@ div.header label.summary {
 .receipt {
 	margin-left: auto;
 	margin-right: auto;
-	width: 600px;
+	width: 400px;
 }
 
 .validator {
