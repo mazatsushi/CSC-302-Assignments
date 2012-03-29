@@ -105,7 +105,8 @@
 		var appleInput = document.getElementById("apples");
 		var appleQty = parseInt(appleInput.value);
 		var validator = document.getElementById("appleValidator");
-		if (isNaN(appleQty) || appleQty < 0) {
+		var regex = /\d+/;
+		if (!regex.test(appleQty) || appleQty < 0) {
 			validator.textContent = "* Invalid number of apples";
 			validator.style.display = "inline";
 			return false;
@@ -121,7 +122,8 @@
 		var bananaInput = document.getElementById("bananas");
 		var bananaQty = parseInt(bananaInput.value);
 		var validator = document.getElementById("bananaValidator");
-		if (isNaN(bananaQty) || bananaQty < 0) {
+		var regex = /\d+/;
+		if (!regex.test(bananaQty) || bananaQty < 0) {
 			validator.textContent = "* Invalid number of bananas";
 			validator.style.display = "inline";
 			return false;
@@ -148,7 +150,8 @@
 		var orangeInput = document.getElementById("oranges");
 		var orangeQty = parseInt(orangeInput.value);
 		var validator = document.getElementById("orangeValidator");
-		if (isNaN(orangeQty) || orangeQty < 0) {
+		var regex = /\d+/;
+		if (!regex.test(orangeQty) || orangeQty < 0) {
 			validator.textContent = "* Invalid number of oranges";
 			validator.style.display = "inline";
 			return false;
@@ -183,7 +186,8 @@
 	function validateUsername() {
 		var username = document.getElementById("username").value;
 		var validator = document.getElementById("usernameValidator");
-		if (!username) {
+		var regex = /\s+/;
+		if (!username || regex.test(username)) {
 			validator.textContent = "* Enter a user name";
 			validator.style.display = "inline";
 			return false;
