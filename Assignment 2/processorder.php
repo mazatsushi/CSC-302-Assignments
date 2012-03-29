@@ -12,21 +12,23 @@
 	$bananas = $_REQUEST["bananas"];
 	$oranges = $_REQUEST["oranges"];
 	$payment = $_REQUEST["payment"];
+	$numericRegex = "/\d+/";
+	$whiteSpaceRegex = "/\s+/";
 	try {
 		// Code block for checking for invalid input values
-		if (is_null($username) || strlen($username) < 1) {
+		if (preg_match($whiteSpaceRegex, $username) || strlen($username) < 1) {
 			throw new UnexpectedValueException("Invalid user name.");
 		}
-		if (is_null($apples) || is_numeric($apples) || $apples < 0) {
+		if (!preg_match($numericRegex, $apples) || $apples < 0) {
 			throw new UnexpectedValueException("Invalid number of apples.");
 		}
-		if (is_null($bananas) || is_numeric($bananas) || $bananas < 0) {
+		if (!preg_match($numericRegex, $bananas) || $bananas < 0) {
 			throw new UnexpectedValueException("Invalid number of bananas.");
 		}
-		if (is_null($oranges) || is_numeric($oranges) || $oranges < 0) {
+		if (!preg_match($numericRegex, $oranges) || $oranges < 0) {
 			throw new UnexpectedValueException("Invalid number of oranges.");
 		}
-		if (is_null($payment) || strlen($payment) < 1) {
+		if (preg_match($whiteSpaceRegex, $payment) || strlen($payment) < 1) {
 			throw new UnexpectedValueException("Invalid payment mode.");
 		}
 
@@ -68,10 +70,10 @@
 		echo '</label>
 		</div>
 		<div class="header">
-		<label>Total Cost: $</label></div>
+		<label>Total Cost: </label></div>
 		<div class="data">
 		<label>';
-		echo $total;
+		echo "$".$total;
 		echo '</label>
 		</div>
 		<div class="alt header">
