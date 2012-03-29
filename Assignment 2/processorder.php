@@ -33,6 +33,23 @@
 		}
 
 		$total = (0.69 * $apples) + (0.59 * $bananas) + (0.39 * $oranges);
+
+
+		// Code block for performing file IO to update the text file
+		$file = fopen("order.txt", "r+");
+		if (!$file) {
+			// This code block expected to run only once
+			$file = fopen("order.txt", "w");
+		}
+		else {
+			// Keep reading line by line until end of file
+			for($i = 0; !feof($file); ++$i) {
+				;
+			}
+		}
+		fclose($file);
+
+		// Code block for writing the HTML output to browser
 		echo '<div class="receipt">
 		<div class="summary">
 		<label>Your order has been received.</label>
