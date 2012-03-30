@@ -35,28 +35,16 @@
 		$total = (0.69 * $apples) + (0.59 * $bananas) + (0.39 * $oranges);
 
 		// Code block for performing file IO to update the text file
-		$file = fopen("order.txt", "r+");
-		if (!$file) {
+		$filename = "order.txt";
+		if (!file_exists($filename)) {
 			// This code block expected to run only once
-			$file = fopen("order.txt", "w");
-			file_put_contents("Total number of apples: ", $apples);
-			file_put_contents("Total number of oranges: ", $oranges);
-			file_put_contents("Total number of bananas: ", $bananas);
+			$output = "Total number of apples: ".$apples."\r\nTotal number of oranges: ".$oranges."\r\nTotal number of bananas: ".$bananas."\r\n";
+			file_put_contents($filename, $output);
 		}
 		else {
-			// Keep reading line by line until end of file
-			for($i = 0; !feof($file); ++$i) {
-				switch($i) {
-					case 0:
-						break;
-					case 1:
-						break;
-					case 2:
-						break;
-				}
-			}
+			// Update the total quantity of fruits ordered thus far
+			file_put_contents($filename, file_get_contents($filename));
 		}
-		fclose($file);
 		?>
 	<div class="receipt">
 		<div class="summary">
