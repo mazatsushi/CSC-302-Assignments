@@ -34,83 +34,95 @@
 
 		$total = (0.69 * $apples) + (0.59 * $bananas) + (0.39 * $oranges);
 
-
 		// Code block for performing file IO to update the text file
 		$file = fopen("order.txt", "r+");
 		if (!$file) {
 			// This code block expected to run only once
 			$file = fopen("order.txt", "w");
+			file_put_contents("Total number of apples: ", $apples);
+			file_put_contents("Total number of oranges: ", $oranges);
+			file_put_contents("Total number of bananas: ", $bananas);
 		}
 		else {
 			// Keep reading line by line until end of file
 			for($i = 0; !feof($file); ++$i) {
-				;
+				switch($i) {
+					case 0:
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+				}
 			}
 		}
 		fclose($file);
-
-		// Code block for writing the HTML output to browser
-		echo '<div class="receipt">
+		?>
+	<div class="receipt">
 		<div class="summary">
-		<label>Your order has been received.</label>
+			<label>Your order has been received.</label>
 		</div>
-		<div class="header">
-		<label>Username: </label>
+		<div>
+			<div class="header">
+				<label>Username: </label>
+			</div>
+			<div class="data">
+				<label> <?php echo $username; ?>
+				</label>
+			</div>
 		</div>
-		<div class="data">
-		<label>';
-		echo $username;
-		echo '</label>
+		<div>
+			<div class="alt header">
+				<label>Number of apples: </label>
+			</div>
+			<div class="alt data">
+				<label> <?php echo $apples; ?>
+				</label>
+			</div>
 		</div>
-		<div class="alt header">
-		<label>Number of apples: </label>
+		<div>
+			<div class="header">
+				<label>Number of bananas: </label>
+			</div>
+			<div class="data">
+				<label> <?php echo $bananas; ?>
+				</label>
+			</div>
 		</div>
-		<div class="alt data">
-		<label>';
-		echo $apples;
-		echo '</label>
+		<div>
+			<div class="alt header">
+				<label>Number of oranges: </label>
+			</div>
+			<div class="alt data">
+				<label> <?php echo $oranges; ?>
+				</label>
+			</div>
 		</div>
-		<div class="header">
-		<label>Number of bananas: </label>
+		<div>
+			<div class="header">
+				<label>Total Cost: </label>
+			</div>
+			<div class="data">
+				<label> <?php echo "$".$total; ?>
+				</label>
+			</div>
 		</div>
-		<div class="data">
-		<label>';
-		echo $bananas;
-		echo '</label>
+		<div>
+			<div class="alt header">
+				<label>Paid Using: </label>
+			</div>
+			<div class="alt data">
+				<label> <?php echo $payment; ?>
+				</label>
+			</div>
 		</div>
-		<div class="alt header">
-		<label>Number of oranges: </label>
-		</div>
-		<div class="alt data">
-		<label>';
-		echo $oranges;
-		echo '</label>
-		</div>
-		<div class="header">
-		<label>Total Cost: </label></div>
-		<div class="data">
-		<label>';
-		echo "$".$total;
-		echo '</label>
-		</div>
-		<div class="alt header">
-		<label>Paid Using: </label>
-		</div>
-		<div class="alt data">
-		<label>';
-		echo $payment;
-		echo '</label>
-		</div>
-		</div>';
-	}
-	catch(UnexpectedValueException $e) {
-		echo '<div class="receipt">
+	</div>
+	<?php } catch(UnexpectedValueException $e) { ?>
+	<div class="receipt">
 		<div class="error">
-		<label>';
-		echo $e->getMessage();
-		echo '</label>
-		</div>';
-	}
-	?>
+			<label><?php echo $e->getMessage(); ?> </label>
+		</div>
+	</div>
+	<?php } ?>
 </body>
 </html>
