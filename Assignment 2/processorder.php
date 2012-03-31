@@ -43,9 +43,26 @@
 		}
 		else {
 			// Update the total quantity of fruits ordered thus far
-			file_put_contents($filename, file_get_contents($filename));
-		}
-		?>
+			$file = fopen($filename, "r");
+			$output = "";
+			for ($i = 0; !feof($file); ++$i) {
+				$string = fgets($file);
+				preg_match($numericRegex, $string, $matches);
+				switch($i) {
+					case 0:
+						$output .= preg_replace($numericRegex, $matches[0] + $apples, $string);
+						break;
+					case 1:
+						$output .= preg_replace($numericRegex, $matches[0] + $oranges, $string);
+						break;
+					case 2:
+						$output .= preg_replace($numericRegex, $matches[0] + $bananas, $string);
+						break;
+				}
+			}
+			fclose($file);
+			file_put_contents($filename, $output);
+		} ?>
 	<div class="receipt">
 		<div class="summary">
 			<label>Your order has been received.</label>
