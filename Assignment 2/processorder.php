@@ -7,6 +7,7 @@
 </head>
 <body>
 	<?php
+	// Get user posted input and setup regular expressions for error checking
 	$username = $_REQUEST["username"];
 	$apples = $_REQUEST["apples"];
 	$bananas = $_REQUEST["bananas"];
@@ -15,7 +16,7 @@
 	$numericRegex = "/\d+/";
 	$whiteSpaceRegex = "/\s+/";
 	try {
-		// Code block for checking for invalid input values
+		// Code block for error checking
 		if (preg_match($whiteSpaceRegex, $username) || strlen($username) < 1) {
 			throw new UnexpectedValueException("Invalid user name.");
 		}
